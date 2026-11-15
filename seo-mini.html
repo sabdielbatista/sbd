@@ -1,0 +1,1198 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALABBI SEO Quick Audit</title>
+
+<style>
+/* =========================================
+   ALABBI SEO QUICK AUDIT
+   Personalización de marca
+========================================= */
+
+#alabbi-seo-audit {
+  --alabbi-orange: #ff6900;
+  --alabbi-teal: #208392;
+  --alabbi-dark: #196E7D;
+  --alabbi-light: #f4f8f9;
+  --alabbi-border: #dce5e8;
+  --alabbi-green: #198754;
+  --alabbi-red: #c0392b;
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--alabbi-dark);
+  max-width: 900px;
+  margin: 25px auto;
+  background: #ffffff;
+  border: 1px solid var(--alabbi-border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 25px rgba(0,0,0,.07);
+  box-sizing: border-box;
+}
+
+#alabbi-seo-audit *,
+#alabbi-seo-audit *::before,
+#alabbi-seo-audit *::after {
+  box-sizing: border-box;
+}
+
+#alabbi-seo-audit .seo-header {
+  background: var(--alabbi-dark);
+  color: white;
+  padding: 28px 25px;
+  border-bottom: 5px solid var(--alabbi-orange);
+}
+
+#alabbi-seo-audit .seo-brand {
+  font-size: 13px;
+  font-weight: bold;
+  color: #8fd5dd;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+#alabbi-seo-audit h2 {
+  font-size: 27px;
+  margin: 0 0 10px;
+  line-height: 1.25;
+  color: white;
+}
+
+#alabbi-seo-audit .seo-header p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e2ebee;
+}
+
+#alabbi-seo-audit .seo-content {
+  padding: 25px;
+}
+
+#alabbi-seo-audit .seo-field {
+  margin-bottom: 17px;
+}
+
+#alabbi-seo-audit label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+#alabbi-seo-audit input,
+#alabbi-seo-audit textarea {
+  display: block;
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid #cbd7dc;
+  border-radius: 7px;
+  background: #fff;
+  color: #24343b;
+  font: inherit;
+  font-size: 14px;
+}
+
+#alabbi-seo-audit input:focus,
+#alabbi-seo-audit textarea:focus {
+  outline: 2px solid #208392;
+  border-color: #208392;
+}
+
+#alabbi-seo-audit textarea {
+  min-height: 180px;
+  resize: vertical;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+}
+
+#alabbi-seo-audit .seo-help {
+  color: #657780;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+#alabbi-seo-audit .seo-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+#alabbi-seo-audit button {
+  border: none;
+  border-radius: 7px;
+  padding: 12px 17px;
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+
+#alabbi-seo-audit button:hover {
+  opacity: .88;
+}
+
+#alabbi-seo-audit button:disabled {
+  opacity: .5;
+  cursor: wait;
+}
+
+#alabbi-seo-audit .seo-primary {
+  background: var(--alabbi-orange);
+  color: white;
+}
+
+#alabbi-seo-audit .seo-secondary {
+  background: var(--alabbi-teal);
+  color: white;
+}
+
+#alabbi-seo-audit .seo-neutral {
+  background: #e9eff1;
+  color: #263c44;
+}
+
+#alabbi-seo-audit .seo-message {
+  background: #fff8ec;
+  border-left: 4px solid var(--alabbi-orange);
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 15px 0;
+  border-radius: 4px;
+}
+
+#alabbi-seo-audit .seo-results {
+  display: none;
+  margin-top: 25px;
+}
+
+#alabbi-seo-audit .seo-score-box {
+  background: var(--alabbi-light);
+  border: 1px solid var(--alabbi-border);
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#alabbi-seo-audit .seo-score {
+  font-size: 54px;
+  font-weight: 800;
+  color: var(--alabbi-teal);
+  line-height: 1.1;
+}
+
+#alabbi-seo-audit .seo-score-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+#alabbi-seo-audit .seo-progress {
+  height: 10px;
+  background: #dce6e8;
+  border-radius: 20px;
+  margin: 18px 0 8px;
+  overflow: hidden;
+}
+
+#alabbi-seo-audit .seo-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--alabbi-orange);
+  transition: width .4s;
+}
+
+#alabbi-seo-audit .seo-result-heading {
+  font-size: 19px;
+  color: var(--alabbi-dark);
+  margin: 25px 0 12px;
+}
+
+#alabbi-seo-audit .seo-check {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-bottom: 1px solid #e9eff1;
+  padding: 13px 0;
+}
+
+#alabbi-seo-audit .seo-check:last-child {
+  border-bottom: none;
+}
+
+#alabbi-seo-audit .seo-status {
+  font-size: 18px;
+  min-width: 25px;
+}
+
+#alabbi-seo-audit .seo-check-title {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+#alabbi-seo-audit .seo-check-detail {
+  color: #64757c;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+#alabbi-seo-audit .seo-footer {
+  background: var(--alabbi-light);
+  border-top: 1px solid var(--alabbi-border);
+  padding: 18px 25px;
+  color: #60747b;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+#alabbi-seo-audit .seo-footer strong {
+  color: var(--alabbi-teal);
+}
+
+@media(max-width:600px) {
+  #alabbi-seo-audit {
+    margin: 10px auto;
+    border-radius: 8px;
+  }
+
+  #alabbi-seo-audit .seo-header,
+  #alabbi-seo-audit .seo-content {
+    padding: 20px 16px;
+  }
+
+  #alabbi-seo-audit h2 {
+    font-size: 23px;
+  }
+
+  #alabbi-seo-audit .seo-score {
+    font-size: 45px;
+  }
+
+  #alabbi-seo-audit .seo-buttons button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="alabbi-seo-audit">
+
+  <div class="seo-header">
+    <h2>SEO Quick Audit</h2>
+    <p>
+      Evalúa los principales elementos SEO de tu sitio web.
+      Obtén un diagnóstico inicial y recomendaciones para
+      mejorar su visibilidad en los buscadores.
+    </p>
+  </div>
+
+  <div class="seo-content">
+
+    <form id="seo-audit-form">
+
+      <div class="seo-field">
+        <label for="seo-url">URL del sitio web</label>
+        <input
+          type="url"
+          id="seo-url"
+          placeholder="https://www.ejemplo.com"
+          required
+        >
+      </div>
+
+      <div class="seo-field">
+        <label for="seo-title-input">Título de tu web</label>
+        <input
+          type="text"
+          id="seo-title-input"
+          placeholder="Nombre o título principal de tu sitio"
+          required
+        >
+      </div>
+
+      <div class="seo-field">
+        <label for="seo-keyword">Palabra clave principal</label>
+        <input
+          type="text"
+          id="seo-keyword"
+          placeholder="Ej. desarrollo de software"
+          required
+        >
+      </div>
+
+      <div class="seo-message">
+        <strong>¿Cómo funciona?</strong><br>
+        El sistema intentará consultar el HTML de tu sitio.
+        Si el servidor bloquea el acceso, puedes pegar su código
+        fuente en el campo alternativo.
+        Los datos no se almacenan.
+      </div>
+
+      <details>
+        <summary style="cursor:pointer;font-weight:bold;font-size:13px;">
+          Introducir código fuente HTML manualmente
+        </summary>
+
+        <div class="seo-field" style="margin-top:15px;">
+          <label for="seo-source">Código fuente de la página</label>
+          <textarea
+            id="seo-source"
+            placeholder="Pega aquí el código fuente HTML completo..."
+          ></textarea>
+          <div class="seo-help">
+            Para obtenerlo, abre la página en tu navegador,
+            utiliza Ctrl+U y copia el código fuente.
+            No pegues contraseñas ni información privada.
+          </div>
+        </div>
+      </details>
+
+      <div class="seo-buttons">
+        <button type="submit" class="seo-primary" id="seo-analyze">
+          Analizar sitio web
+        </button>
+
+        <button type="button" class="seo-secondary"
+          id="seo-analyze-source">
+          Analizar código pegado
+        </button>
+
+        <button type="reset" class="seo-neutral">
+          Limpiar
+        </button>
+      </div>
+
+    </form>
+
+    <div id="seo-message" class="seo-message" style="display:none;"></div>
+
+    <div id="seo-results" class="seo-results">
+
+      <div class="seo-score-box">
+        <div class="seo-score" id="seo-score">0/100</div>
+        <div class="seo-score-label" id="seo-score-label">
+          Efectividad SEO estimada
+        </div>
+
+        <div class="seo-progress">
+          <div class="seo-progress-bar" id="seo-progress-bar"></div>
+        </div>
+
+        <div id="seo-score-summary"></div>
+      </div>
+
+      <h3 class="seo-result-heading">Resultados del análisis</h3>
+      <div id="seo-checks"></div>
+
+      <div class="seo-buttons">
+        <button type="button" class="seo-secondary"
+          id="seo-export">
+          Descargar informe TXT
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="seo-footer">
+    Este diagnóstico es orientativo y no constituye una
+    puntuación oficial de Google. La auditoría se limita
+    a los elementos accesibles desde el navegador.
+  </div>
+
+</div>
+
+<script>
+(function () {
+"use strict";
+
+/* =========================================
+   ALABBI SEO QUICK AUDIT
+   Ejecución local, sin base de datos
+========================================= */
+
+const root = document.getElementById("alabbi-seo-audit");
+
+const form = root.querySelector("#seo-audit-form");
+const urlInput = root.querySelector("#seo-url");
+const titleInput = root.querySelector("#seo-title-input");
+const keywordInput = root.querySelector("#seo-keyword");
+const sourceInput = root.querySelector("#seo-source");
+
+const analyzeButton = root.querySelector("#seo-analyze");
+const sourceButton = root.querySelector("#seo-analyze-source");
+
+const messageBox = root.querySelector("#seo-message");
+const resultsBox = root.querySelector("#seo-results");
+const checksBox = root.querySelector("#seo-checks");
+
+let lastReport = null;
+
+/* Mensajes seguros: no insertar HTML de páginas externas */
+
+function showMessage(text) {
+  messageBox.textContent = text;
+  messageBox.style.display = "block";
+}
+
+function hideMessage() {
+  messageBox.textContent = "";
+  messageBox.style.display = "none";
+}
+
+function normalizeText(text) {
+  return (text || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
+function getMeta(doc, name) {
+  const element = doc.querySelector(
+    'meta[name="' + name + '"]'
+  );
+
+  return element ? (element.content || "").trim() : "";
+}
+
+function getProperty(doc, property) {
+  const element = doc.querySelector(
+    'meta[property="' + property + '"]'
+  );
+
+  return element ? (element.content || "").trim() : "";
+}
+
+function countWords(text) {
+  return (text || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function safeUrl(value) {
+  try {
+    const url = new URL(value);
+
+    if (url.protocol !== "http:" &&
+        url.protocol !== "https:") {
+      return null;
+    }
+
+    return url;
+  } catch (e) {
+    return null;
+  }
+}
+
+/* Crear indicador */
+
+function addCheck(report, title, passed, detail, weight) {
+  report.checks.push({
+    title: title,
+    passed: !!passed,
+    detail: detail,
+    weight: weight || 1
+  });
+}
+
+/* =========================================
+   MOTOR DE EVALUACIÓN
+========================================= */
+
+function analyzeDocument(doc, requestedUrl, userTitle, keyword) {
+
+  const report = {
+    url: requestedUrl,
+    userTitle: userTitle,
+    keyword: keyword,
+    date: new Date().toLocaleString("es"),
+    checks: [],
+    score: 1
+  };
+
+  const actualTitle = (doc.title || "").trim();
+  const description = getMeta(doc, "description");
+  const robots = getMeta(doc, "robots");
+  const canonical = doc.querySelector('link[rel="canonical"]');
+  const canonicalUrl = canonical ? canonical.href : "";
+
+  const lang = doc.documentElement
+    ? doc.documentElement.getAttribute("lang") || ""
+    : "";
+
+  const viewport = getMeta(doc, "viewport");
+  const charset = doc.characterSet || "";
+
+  const h1s = Array.from(doc.querySelectorAll("h1"));
+  const h2s = Array.from(doc.querySelectorAll("h2"));
+  const h3s = Array.from(doc.querySelectorAll("h3"));
+
+  const bodyText = doc.body
+    ? (doc.body.innerText || doc.body.textContent || "")
+    : "";
+
+  const bodyWords = countWords(bodyText);
+
+  const key = normalizeText(keyword);
+  const normalizedBody = normalizeText(bodyText);
+  const normalizedActualTitle = normalizeText(actualTitle);
+  const normalizedDescription = normalizeText(description);
+
+  const titleMatch = normalizedActualTitle.includes(
+    normalizeText(userTitle)
+  );
+
+  /* 1. HTTPS */
+  const parsedUrl = safeUrl(requestedUrl);
+
+  addCheck(
+    report,
+    "Conexión HTTPS",
+    parsedUrl && parsedUrl.protocol === "https:",
+    parsedUrl && parsedUrl.protocol === "https:"
+      ? "La URL utiliza HTTPS."
+      : "La URL no utiliza HTTPS. Se recomienda habilitar un certificado SSL.",
+    2
+  );
+
+  /* 2. Title */
+  addCheck(
+    report,
+    "Título SEO",
+    actualTitle.length >= 15 && actualTitle.length <= 60,
+    actualTitle
+      ? "Título detectado: " + actualTitle +
+        " (" + actualTitle.length + " caracteres)."
+      : "No se encontró un título HTML.",
+    2
+  );
+
+  /* 3. Correspondencia con el título introducido */
+  addCheck(
+    report,
+    "Correspondencia del título",
+    titleMatch,
+    titleMatch
+      ? "El título HTML coincide con el título proporcionado."
+      : "El título HTML no coincide exactamente con el título introducido. Verifica si es el título SEO esperado.",
+    1
+  );
+
+  /* 4. Meta description */
+  addCheck(
+    report,
+    "Meta description",
+    description.length >= 70 && description.length <= 160,
+    description
+      ? "Descripción detectada: " + description +
+        " (" + description.length + " caracteres)."
+      : "No se encontró meta description.",
+    2
+  );
+
+  /* 5. H1 */
+  addCheck(
+    report,
+    "Encabezado H1",
+    h1s.length === 1,
+    h1s.length === 1
+      ? "Se encontró un único H1: " + h1s[0].textContent.trim()
+      : "Se encontraron " + h1s.length +
+        " encabezados H1. Se recomienda una estructura clara con un H1 principal.",
+    2
+  );
+
+  /* 6. H2 */
+  addCheck(
+    report,
+    "Estructura de encabezados H2",
+    h2s.length >= 2,
+    "Se detectaron " + h2s.length +
+      " encabezados H2. Utiliza encabezados descriptivos para organizar el contenido.",
+    1
+  );
+
+  /* 7. H3 */
+  addCheck(
+    report,
+    "Estructura de encabezados H3",
+    h3s.length >= 1,
+    "Se detectaron " + h3s.length +
+      " encabezados H3. Son útiles para desarrollar subsecciones cuando corresponda.",
+    1
+  );
+
+  /* 8. Keyword en título */
+  addCheck(
+    report,
+    "Palabra clave en el título",
+    key && normalizedActualTitle.includes(key),
+    key && normalizedActualTitle.includes(key)
+      ? "La palabra clave aparece en el título."
+      : "La palabra clave principal no aparece en el título HTML.",
+    2
+  );
+
+  /* 9. Keyword en descripción */
+  addCheck(
+    report,
+    "Palabra clave en meta description",
+    key && normalizedDescription.includes(key),
+    key && normalizedDescription.includes(key)
+      ? "La palabra clave aparece en la descripción."
+      : "La palabra clave no aparece en la meta description.",
+    1
+  );
+
+  /* 10. Keyword en H1 */
+  const h1Text = normalizeText(
+    h1s.map(h => h.textContent).join(" ")
+  );
+
+  addCheck(
+    report,
+    "Palabra clave en H1",
+    key && h1Text.includes(key),
+    key && h1Text.includes(key)
+      ? "La palabra clave aparece en el H1."
+      : "No se detectó la palabra clave en el H1.",
+    2
+  );
+
+  /* 11. Keyword en contenido */
+  const keywordOccurrences = key
+    ? normalizedBody.split(key).length - 1
+    : 0;
+
+  addCheck(
+    report,
+    "Presencia de palabra clave en contenido",
+    keywordOccurrences >= 1,
+    "Se detectaron " + keywordOccurrences +
+      " coincidencias de la palabra clave en el texto visible. Evita la sobreoptimización.",
+    2
+  );
+
+  /* 12. Cantidad de contenido */
+  addCheck(
+    report,
+    "Contenido textual",
+    bodyWords >= 300,
+    "Se estiman " + bodyWords +
+      " palabras en el texto visible. La extensión adecuada depende de la intención de búsqueda.",
+    1
+  );
+
+  /* 13. Canonical */
+  addCheck(
+    report,
+    "URL canonical",
+    !!canonicalUrl,
+    canonicalUrl
+      ? "Canonical detectada: " + canonicalUrl
+      : "No se encontró una etiqueta canonical.",
+    2
+  );
+
+  /* 14. Idioma */
+  addCheck(
+    report,
+    "Idioma del documento",
+    !!lang,
+    lang
+      ? "Idioma declarado: " + lang
+      : "No se encontró el atributo lang en el elemento HTML.",
+    1
+  );
+
+  /* 15. Viewport */
+  addCheck(
+    report,
+    "Adaptación a dispositivos móviles",
+    !!viewport && viewport.includes("width=device-width"),
+    viewport
+      ? "Viewport detectado: " + viewport
+      : "No se encontró meta viewport.",
+    2
+  );
+
+  /* 16. Robots */
+  const robotsNoindex = /noindex/i.test(robots);
+
+  addCheck(
+    report,
+    "Directivas de indexación",
+    !robotsNoindex,
+    robots
+      ? "Meta robots detectada: " + robots
+      : "No se encontró meta robots. La ausencia no implica un problema: los buscadores pueden indexar por defecto.",
+    2
+  );
+
+  /* 17. Imágenes ALT */
+  const images = Array.from(doc.querySelectorAll("img"));
+  const imagesWithoutAlt = images.filter(
+    img => !img.hasAttribute("alt")
+  );
+
+  addCheck(
+    report,
+    "Texto alternativo de imágenes",
+    images.length === 0 || imagesWithoutAlt.length === 0,
+    images.length === 0
+      ? "No se detectaron imágenes HTML."
+      : "Imágenes detectadas: " + images.length +
+        ". Imágenes sin atributo ALT: " + imagesWithoutAlt.length + ".",
+    2
+  );
+
+  /* 18. Imágenes con carga diferida */
+  const lazyImages = images.filter(
+    img => img.getAttribute("loading") === "lazy"
+  );
+
+  addCheck(
+    report,
+    "Carga diferida de imágenes",
+    images.length === 0 ||
+      lazyImages.length >= Math.ceil(images.length * 0.5),
+    "Imágenes con loading=lazy: " + lazyImages.length +
+      " de " + images.length +
+      ". No todas las imágenes deben cargarse de forma diferida; prioriza la imagen principal.",
+    1
+  );
+
+  /* 19. Open Graph */
+  const ogTitle = getProperty(doc, "og:title");
+  const ogDescription = getProperty(doc, "og:description");
+  const ogImage = getProperty(doc, "og:image");
+
+  addCheck(
+    report,
+    "Open Graph",
+    !!ogTitle && !!ogDescription && !!ogImage,
+    "og:title: " + (ogTitle ? "Sí" : "No") +
+      "; og:description: " + (ogDescription ? "Sí" : "No") +
+      "; og:image: " + (ogImage ? "Sí" : "No") + ".",
+    1
+  );
+
+  /* 20. Datos estructurados */
+  const structuredData = doc.querySelectorAll(
+    'script[type="application/ld+json"]'
+  );
+
+  addCheck(
+    report,
+    "Datos estructurados Schema.org",
+    structuredData.length > 0,
+    structuredData.length > 0
+      ? "Se encontraron " + structuredData.length +
+        " bloques JSON-LD. Su validez requiere una comprobación adicional."
+      : "No se encontraron bloques JSON-LD.",
+    1
+  );
+
+  /* 21. Enlaces */
+  const links = Array.from(doc.querySelectorAll("a[href]"));
+
+  const internalLinks = links.filter(link => {
+    try {
+      return new URL(link.href, requestedUrl).hostname ===
+        new URL(requestedUrl).hostname;
+    } catch (e) {
+      return false;
+    }
+  });
+
+  const externalLinks = links.length - internalLinks.length;
+
+  addCheck(
+    report,
+    "Enlaces internos y externos",
+    internalLinks.length >= 2,
+    "Enlaces internos detectados: " + internalLinks.length +
+      ". Enlaces externos detectados: " + externalLinks + ".",
+    1
+  );
+
+  /* 22. Enlaces con texto descriptivo */
+  const emptyLinks = links.filter(link => {
+    const text = (link.innerText || link.textContent || "").trim();
+    const hasImageAlt = !!link.querySelector("img[alt]");
+    return !text && !hasImageAlt;
+  });
+
+  addCheck(
+    report,
+    "Textos descriptivos en enlaces",
+    emptyLinks.length === 0,
+    "Enlaces sin texto descriptivo detectable: " + emptyLinks.length + ".",
+    1
+  );
+
+  /* 23. Favicon */
+  const favicon = doc.querySelector(
+    'link[rel~="icon"], link[rel="shortcut icon"]'
+  );
+
+  addCheck(
+    report,
+    "Favicon",
+    !!favicon,
+    favicon
+      ? "Se encontró una referencia a un favicon."
+      : "No se encontró una referencia a un favicon.",
+    1
+  );
+
+  /* 24. Charset */
+  addCheck(
+    report,
+    "Codificación de caracteres",
+    /utf-8/i.test(charset),
+    charset
+      ? "Codificación detectada: " + charset
+      : "No se pudo determinar la codificación del documento.",
+    1
+  );
+
+  /* 25. URL legible */
+  const path = parsedUrl ? parsedUrl.pathname : "";
+  const readablePath = path.length <= 100 &&
+    !/%[0-9a-f]{2}/i.test(path) &&
+    !/[A-Z]/.test(path);
+
+  addCheck(
+    report,
+    "Estructura de URL",
+    readablePath,
+    "Ruta analizada: " + path +
+      ". Se recomienda utilizar URLs descriptivas, breves y legibles.",
+    1
+  );
+
+  /* 26. Twitter Cards */
+  const twitterCard = getMeta(doc, "twitter:card");
+
+  addCheck(
+    report,
+    "Twitter/X Cards",
+    !!twitterCard,
+    twitterCard
+      ? "Tipo de tarjeta detectado: " + twitterCard
+      : "No se encontró meta twitter:card. Es una recomendación de presentación social, no un factor directo de ranking.",
+    1
+  );
+
+  /* Cálculo ponderado */
+  let totalWeight = 0;
+  let earnedWeight = 0;
+
+  report.checks.forEach(check => {
+    totalWeight += check.weight;
+
+    if (check.passed) {
+      earnedWeight += check.weight;
+    }
+  });
+
+  report.score = Math.max(
+    1,
+    Math.min(100, Math.round(
+      (earnedWeight / totalWeight) * 100
+    ))
+  );
+
+  return report;
+}
+
+/* =========================================
+   REPRESENTACIÓN DE RESULTADOS
+========================================= */
+
+function renderReport(report) {
+
+  checksBox.textContent = "";
+
+  root.querySelector("#seo-score").textContent =
+    report.score + "/100";
+
+  root.querySelector("#seo-progress-bar").style.width =
+    report.score + "%";
+
+  let summary = "";
+
+  if (report.score >= 85) {
+    summary = "Buen resultado inicial. Revisa las oportunidades de mejora detectadas.";
+  } else if (report.score >= 65) {
+    summary = "El sitio presenta una base SEO aceptable, pero tiene aspectos que conviene mejorar.";
+  } else if (report.score >= 40) {
+    summary = "Se detectan oportunidades importantes de optimización.";
+  } else {
+    summary = "El diagnóstico muestra numerosas oportunidades de mejora SEO.";
+  }
+
+  root.querySelector("#seo-score-summary").textContent = summary;
+
+  report.checks.forEach(check => {
+
+    const row = document.createElement("div");
+    row.className = "seo-check";
+
+    const status = document.createElement("div");
+    status.className = "seo-status";
+    status.textContent = check.passed ? "✓" : "!";
+    status.style.color = check.passed
+      ? "var(--alabbi-green)"
+      : "var(--alabbi-orange)";
+
+    const content = document.createElement("div");
+
+    const title = document.createElement("div");
+    title.className = "seo-check-title";
+    title.textContent = check.title;
+
+    const detail = document.createElement("div");
+    detail.className = "seo-check-detail";
+    detail.textContent = check.detail;
+
+    content.appendChild(title);
+    content.appendChild(detail);
+
+    row.appendChild(status);
+    row.appendChild(content);
+
+    checksBox.appendChild(row);
+  });
+
+  resultsBox.style.display = "block";
+}
+
+/* =========================================
+   ANALIZAR CÓDIGO FUENTE PEGADO
+========================================= */
+
+function analyzeSource() {
+
+  const html = sourceInput.value.trim();
+  const url = safeUrl(urlInput.value.trim());
+  const title = titleInput.value.trim();
+  const keyword = keywordInput.value.trim();
+
+  if (!url || !title || !keyword) {
+    showMessage(
+      "Introduce una URL válida, el título de la web y la palabra clave principal."
+    );
+    return;
+  }
+
+  if (!html) {
+    showMessage(
+      "Pega el código fuente HTML antes de realizar el análisis."
+    );
+    return;
+  }
+
+  hideMessage();
+
+  try {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    lastReport = analyzeDocument(
+      doc,
+      url.href,
+      title,
+      keyword
+    );
+
+    renderReport(lastReport);
+
+    showMessage(
+      "Análisis realizado a partir del código fuente introducido."
+    );
+
+  } catch (error) {
+    showMessage(
+      "No fue posible analizar el código fuente. Verifica que sea HTML válido."
+    );
+  }
+}
+
+/* =========================================
+   INTENTO DE CONSULTA DIRECTA
+========================================= */
+
+async function analyzeUrl() {
+
+  const url = safeUrl(urlInput.value.trim());
+  const title = titleInput.value.trim();
+  const keyword = keywordInput.value.trim();
+
+  if (!url || !title || !keyword) {
+    showMessage(
+      "Introduce una URL válida, el título de la web y la palabra clave principal."
+    );
+    return;
+  }
+
+  hideMessage();
+
+  analyzeButton.disabled = true;
+  analyzeButton.textContent = "Analizando...";
+
+  try {
+
+    const response = await fetch(url.href, {
+      method: "GET",
+      mode: "cors",
+      credentials: "omit",
+      redirect: "follow"
+    });
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status);
+    }
+
+    const html = await response.text();
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    lastReport = analyzeDocument(
+      doc,
+      url.href,
+      title,
+      keyword
+    );
+
+    renderReport(lastReport);
+
+    showMessage(
+      "Análisis completado. Se pudo acceder al HTML del sitio."
+    );
+
+  } catch (error) {
+
+    showMessage(
+      "El navegador no pudo leer el HTML de esta URL. " +
+      "Esto puede deberse a restricciones CORS, redirecciones o " +
+      "bloqueos del servidor. Puedes pegar el código fuente HTML " +
+      "en el apartado alternativo y volver a analizar."
+    );
+
+  } finally {
+
+    analyzeButton.disabled = false;
+    analyzeButton.textContent = "Analizar sitio web";
+  }
+}
+
+/* =========================================
+   EXPORTAR INFORME
+========================================= */
+
+function exportReport() {
+
+  if (!lastReport) {
+    showMessage("Primero debes realizar un análisis.");
+    return;
+  }
+
+  const lines = [];
+
+  lines.push("ALABBI SEO QUICK AUDIT");
+  lines.push("INFORME DE DIAGNÓSTICO SEO");
+  lines.push("--------------------------------------");
+
+  lines.push("URL: " + lastReport.url);
+  lines.push("Título introducido: " + lastReport.userTitle);
+  lines.push("Palabra clave: " + lastReport.keyword);
+  lines.push("Fecha: " + lastReport.date);
+
+  lines.push("");
+  lines.push("PUNTUACIÓN SEO: " + lastReport.score + "/100");
+  lines.push("--------------------------------------");
+
+  lastReport.checks.forEach(check => {
+
+    lines.push(
+      (check.passed ? "[OK] " : "[REVISAR] ") +
+      check.title
+    );
+
+    lines.push(check.detail);
+    lines.push("");
+  });
+
+  lines.push("--------------------------------------");
+  lines.push(
+    "Este informe es orientativo y no constituye " +
+    "una puntuación oficial de Google."
+  );
+
+  const blob = new Blob(
+    ["\ufeff" + lines.join("\r\n")],
+    { type: "text/plain;charset=utf-8" }
+  );
+
+  const downloadUrl = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = downloadUrl;
+  link.download = "Informe_SEO_ALABBI.txt";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(downloadUrl);
+}
+
+/* =========================================
+   EVENTOS
+========================================= */
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+  analyzeUrl();
+});
+
+sourceButton.addEventListener("click", function() {
+  analyzeSource();
+});
+
+root.querySelector("#seo-export").addEventListener(
+  "click",
+  exportReport
+);
+
+form.addEventListener("reset", function() {
+
+  lastReport = null;
+
+  resultsBox.style.display = "none";
+  checksBox.textContent = "";
+
+  hideMessage();
+});
+
+})();
+</script>
+
+</body>
+</html>
